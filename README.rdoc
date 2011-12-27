@@ -1,4 +1,4 @@
 
 =TODO:
 * add model inclusion - something akin textcaptcha
-* write this damn readme :)
+* write this damn readme! :)
