@@ -3,10 +3,10 @@ require "uri"
 
 module Recaptcha
   module Validator
-    def self.validate_recaptcha(challenge, response, remoteip)
+    def self.validate_recaptcha(challenge, response, remoteip, private_key = ENV['RECAPTCHA_PRIVATE_KEY'] )
       uri = URI.parse("http://www.google.com/recaptcha/api/verify")
       params = {
-        :privatekey => ENV['RECAPTCHA_PRIVATE_KEY'],
+        :privatekey => private_key,
         :challenge => challenge,
         :response => response,
         :remoteip => remoteip
