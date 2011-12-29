@@ -5,8 +5,8 @@ require "recaptcha/version"
 Gem::Specification.new do |s|
   s.name        = "recaptcha"
   s.version     = Recaptcha::VERSION
-  s.authors     = ["Uģis Ozols"]
-  s.email       = ["ugis.ozolss@gmail.com"]
+  s.authors     = ["Tom Caspy"]
+  s.email       = ["tom@sir.co.il"]
   s.homepage    = ""
   s.summary     = %q{Simple recaptcha plugin}
   s.description = %q{Simple recaptcha plugin which allows to add reCAPTCHA validations to your forms}
