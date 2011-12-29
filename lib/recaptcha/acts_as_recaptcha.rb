@@ -1,5 +1,5 @@
 module Recaptcha
-	#module ActsAsRecaptcha
+	module ActsAsRecaptcha
 
 		def acts_as_recaptcha(options = nil)
 			cattr_accessor :recaptcha_config
@@ -59,8 +59,8 @@ module Recaptcha
       end
 
 		end
-	#end
+	end
 end
 
-ActiveRecord::Base.extend Recaptcha
+ActiveRecord::Base.extend Recaptcha::ActsAsRecaptcha
 
