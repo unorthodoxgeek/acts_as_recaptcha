@@ -42,3 +42,7 @@ module Recaptcha
 
 	end
 end
+
+ActiveSupport.on_load(:action_view) do
+  include Recaptcha::RecaptchaHelper
+end
