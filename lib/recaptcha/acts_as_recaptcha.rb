@@ -9,7 +9,7 @@ module Recaptcha
 				if accessible_attributes.nil?
 					attr_protected :skip_recaptcha
 				else
-					attr_accessible :recaptcha_answer, :recaptcha_challenge
+					attr_accessible :recaptcha_answer, :recaptcha_challenge, :recaptcha_remote_ip
 				end
 			end
 
@@ -53,9 +53,9 @@ module Recaptcha
 			def validate_recaptcha_answer
         status, error = Recaptcha::Validator.validate_recaptcha(recaptcha_challenge, recaptcha_answer, recaptcha_remote_ip, self.recaptcha_config[:private_key])
         if status == "false"
-          flash[:error] = error
-          redirect_to :back
+          return false
         end
+        return true
       end
 
 		end
@@ -63,4 +63,3 @@ module Recaptcha
 end
 
 ActiveRecord::Base.extend Recaptcha::ActsAsRecaptcha
-
