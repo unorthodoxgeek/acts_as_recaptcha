@@ -1,35 +1,35 @@
 module Recaptcha
 	module RecaptchaHelper
-		def recaptcha_tag
-			"
-				<script type=\"text/javascript\"
-					src=\"http://www.google.com/recaptcha/api/challenge?k=#{ENV['RECAPTCHA_PUBLIC_KEY']}\">
-				</script>
-				<noscript>
-					<iframe src=\"http://www.google.com/recaptcha/api/noscript?k=#{ENV['RECAPTCHA_PUBLIC_KEY']}\"
-						height=\"300\" width=\"500\" frameborder=\"0\"></iframe><br>
-					<textarea name=\"recaptcha_challenge_field\" rows=\"3\" cols=\"40\">
-					</textarea>
-					<input type=\"hidden\" name=\"recaptcha_response_field\"
-						value=\"manual_challenge\">
-				</noscript>
-			".html_safe
+
+		def recaptcha_image
+			"<div id=\"recaptcha_image\"></div>".html_safe
 		end
 
 		def recaptcha_fields(f, &block)
 			model        = f.object
 			captcha_html = "
-				<script type=\"text/javascript\"
-					src=\"http://www.google.com/recaptcha/api/challenge?k=#{ENV['RECAPTCHA_PUBLIC_KEY']}\">
+			<script type=\"text/javascript\">
+ var RecaptchaOptions = {
+ 		#{"lang: '#{model.recaptcha_config[:locale]}'," if model.recaptcha_config[:locale].present?}
+    theme : 'custom',
+    custom_theme_widget: 'recaptcha_widget'
+ };
+
+ </script>
+<div id=\"recaptcha_widget\" style=\"display:none\">
+			"
+captcha_scripts = "<script type=\"text/javascript\"
+					src=\"http://www.google.com/recaptcha/api/challenge?k=#{model.recaptcha_config[:public_key]}\">
 				</script>
 				<noscript>
-					<iframe src=\"http://www.google.com/recaptcha/api/noscript?k=#{ENV['RECAPTCHA_PUBLIC_KEY']}\"
+					<iframe src=\"http://www.google.com/recaptcha/api/noscript?k=#{model.recaptcha_config[:public_key]}\"
 						height=\"300\" width=\"500\" frameborder=\"0\"></iframe>
-				</noscript>
-			"
+						<input type=\"hidden\" name=\"recaptcha_response_field\" value=\"manual_challenge\">
+				</noscript>"
 			if model.perform_recaptcha?
-				captcha_html += f.hidden_field(:recaptcha_challenge)
 				captcha_html += capture(&block)
+				captcha_html += "</div>"
+				captcha_html += captcha_scripts
 			end
 
 			# Rails 2 compatability
