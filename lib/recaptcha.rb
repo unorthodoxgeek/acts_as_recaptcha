@@ -1,5 +1,0 @@
-require "rails"
-require "recaptcha/controller_mixins"
-require "recaptcha/recaptcha_helper"
-require "recaptcha/validator"
-require "recaptcha/acts_as_recaptcha"

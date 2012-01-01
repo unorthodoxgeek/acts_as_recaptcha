@@ -1,4 +1,4 @@
-module Recaptcha
+module ActsAsRecaptcha
 	module RecaptchaHelper
 
 		def recaptcha_image
@@ -41,8 +41,4 @@ captcha_scripts = "<script type=\"text/javascript\"
 		end
 
 	end
-end
-
-ActiveSupport.on_load(:action_view) do
-  include Recaptcha::RecaptchaHelper
 end

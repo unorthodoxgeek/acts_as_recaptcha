@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "recaptcha/version"
+require "acts_as_recaptcha/version"
 
 Gem::Specification.new do |s|
-  s.name        = "recaptcha"
+  s.name        = "acts_as_recaptcha"
   s.version     = Recaptcha::VERSION
   s.authors     = ["Tom Caspy"]
   s.email       = ["tom@sir.co.il"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Simple recaptcha plugin}
   s.description = %q{Simple recaptcha plugin which allows to add reCAPTCHA validations to your forms}
 
-  s.rubyforge_project = "recaptcha"
+  s.rubyforge_project = "acts_as_recaptcha"
 
   s.add_dependency "rails", "~> 3.1.0"
   s.add_development_dependency "rspec", "~> 2.6"
