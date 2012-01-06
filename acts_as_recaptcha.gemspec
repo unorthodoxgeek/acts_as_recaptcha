@@ -4,7 +4,7 @@ require "acts_as_recaptcha/version"
 
 Gem::Specification.new do |s|
   s.name        = "acts_as_recaptcha"
-  s.version     = Recaptcha::VERSION
+  s.version     = ActsAsRecaptcha::VERSION
   s.authors     = ["Tom Caspy"]
   s.email       = ["tom@sir.co.il"]
   s.homepage    = ""
