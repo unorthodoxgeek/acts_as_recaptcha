@@ -1,7 +1,7 @@
 require "net/http"
 require "uri"
 
-module Recaptcha
+module ActsAsRecaptcha
   module Validator
     def self.validate_recaptcha(challenge, response, remoteip, private_key = ENV['RECAPTCHA_PRIVATE_KEY'] )
       uri = URI.parse("http://www.google.com/recaptcha/api/verify")

@@ -51,7 +51,7 @@ module ActsAsRecaptcha
 			end
 
 			def validate_recaptcha_answer
-        status, error = Recaptcha::Validator.validate_recaptcha(recaptcha_challenge, recaptcha_answer, recaptcha_remote_ip, self.recaptcha_config[:private_key])
+        status, error = Validator.validate_recaptcha(recaptcha_challenge, recaptcha_answer, recaptcha_remote_ip, self.recaptcha_config[:private_key])
         if status == "false"
           return false
         end

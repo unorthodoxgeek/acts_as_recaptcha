@@ -1,4 +1,55 @@
 
-=TODO:
-* add model inclusion - something akin textcaptcha
-* write this damn readme! :)
+=Acts As Recaptcha
+acts_as_recaptcha is a fork of recaptcha, and a rather shameless copy of the method used in the awesome acts_as_textcaptcha gem. This collab brings recaptcha integration with a rails app almost as easy as the integration of the textcaptcha gem, minus some annoying stuff forced by google's horrible recaptcha API.
+
+==Usage
+install: in your gemfile:
+`
+gem "acts_as_recaptcha", :git => "git://github.com/unorthodoxgeek/acts_as_recaptcha.git"
+`
+
+first, create a recaptcha.yml file in your config folder, put your private and public keys you get from https://www.google.com/recaptcha/admin/create
+`
+development:
+  private_key: "priv_key"
+  public_key: "pub_key"
+  locale: "he"
+test:
+  private_key: "priv_key"
+  public_key: "pub_key"
+production:
+  private_key: "priv_key"
+  public_key: "pub_key"
+`
+in the model, simply declare acts_as_recaptcha. This will add the neccesary validations. If you wish to add some logic to showing the captcha, you can override the perform_textcaptcha? method:
+
+`
+def perform textcaptcha?
+	return (true or false)
+end
+`
+
+did I mention the recaptcha plugin sucks? well, it does. there's no problem to fill in the answer in the right place, but the encrypted answer to check against has to be inside a form element named "recaptcha_challenge_field", which can't be renamed (I tried...), so when we create the object in the controller, we need to put that in the right place. so in the create / update of your object you need to do something like this:
+`
+message_params = params[:message].merge({:recaptcha_challenge => params[:recaptcha_challenge_field], :recaptcha_remote_ip => request.remote_ip })
+Message.create(message_params)
+`
+
+==To show the captcha:
+inside the <%= form_for(whatever) do |f| %> declare a second block:
+`
+<%= recaptcha_fields(f) do -%>
+<%= recaptcha_image %>
+<%= f.text_field :recaptcha_answer, :id => "recaptcha_response_field", :dir => "ltr" %> #note that the ID must be "recaptcha_response_field"
+<a href="javascript:Recaptcha.reload()>Too hard! give me another!</a>
+<% end %>
+`
+it's very recommended you add the refresh element, because recaptcha can be quite impossible to solve for normal mortal beings. you can use anything inside that link, of course.
+This gem uses the custom theme, so you can design it however you wish.
+
+==Want to be an awesome person?
+this gem is very simplistic now, and could use more work, If you want to add some awesomeness, you're more than welcome to fork, do your thing and issue a pull request.
+here's a short TODO list:
+* Write tests
+* Add option to use recaptcha's default themes, right now we use the custom theme
+* Make the gem backward compatible with Rails 2.x
