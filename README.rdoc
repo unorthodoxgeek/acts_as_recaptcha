@@ -5,7 +5,7 @@ acts_as_recaptcha is a fork of recaptcha, and a rather shameless copy of the met
 ==Usage
 install: in your gemfile:
 
-  gem "acts_as_recaptcha", :git => "git://github.com/unorthodoxgeek/acts_as_recaptcha.git"
+  gem "acts_as_recaptcha"
 
 
 first, create a recaptcha.yml file in your config folder, put your private and public keys you get from https://www.google.com/recaptcha/admin/create

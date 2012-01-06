@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = ActsAsRecaptcha::VERSION
   s.authors     = ["Tom Caspy"]
   s.email       = ["tom@sir.co.il"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/unorthodoxgeek/acts_as_recaptcha"
   s.summary     = %q{Simple recaptcha plugin}
   s.description = %q{Simple recaptcha plugin which allows to add reCAPTCHA validations to your forms}
 
