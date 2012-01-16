@@ -30,6 +30,8 @@ captcha_scripts = "<script type=\"text/javascript\"
 				captcha_html += capture(&block)
 				captcha_html += "</div>"
 				captcha_html += captcha_scripts
+			else
+				captcha_html = ""
 			end
 
 			# Rails 2 compatability
